@@ -1,0 +1,22 @@
+{
+    "name": "codeplace-io/multitenancy-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle for multitenancy architecture",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maciej Żukiewicz",
+            "email": "maciek@codeplace.io",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codeplace\\MultitenancyBundle\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "symfony/framework-bundle": "^4.0|^5.0"
+    }
+}

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Codeplace\MultitenancyBundle\:
+        resource: '../../'
+
+    Codeplace\MultitenancyBundle\EventListener\ResolveTenantListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 10 }

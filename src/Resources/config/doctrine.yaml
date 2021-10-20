@@ -1,0 +1,6 @@
+doctrine:
+    orm:
+        filters:
+            codeplace_tenant_filter:
+                class:  Codeplace\MultitenancyBundle\Doctrine\Filter\TenantAwareFilter
+                enabled: true
