@@ -78,8 +78,8 @@ final class ResolveTenantListener
                 ));
             }
 
-            $filter->setTenantReferenceColumnName($this->tenantReferenceColumnName);
-            $filter->setTenant($this->tenantContext->getTenant());
+            $filter->setParameter('tenant_reference_column_name', $this->tenantReferenceColumnName);
+            $filter->setParameter('tenant_id', $this->tenantContext->getTenant()->getId());
         }
     }
 }

@@ -11,22 +11,10 @@ use Doctrine\ORM\Query\Filter\SQLFilter;
 
 final class TenantAwareFilter extends SQLFilter
 {
-    private ?TenantInterface $tenant;
-    private ?string $tenantReferenceColumnName;
-
-    public function setTenant(TenantInterface $tenant)
-    {
-        $this->tenant = $tenant;
-    }
-
-    public function setTenantReferenceColumnName(?string $tenantReferenceColumnName): void
-    {
-        $this->tenantReferenceColumnName = $tenantReferenceColumnName;
-    }
-
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
-        if (null === $this->tenant) {
+        $tenantId = $this->getRawParameter('tenant_id');
+        if (null === $tenantId) {
             return '';
         }
 
@@ -35,6 +23,13 @@ final class TenantAwareFilter extends SQLFilter
             return '';
         }
 
-        return $targetTableAlias.'.'.$this->tenantReferenceColumnName.' = '.$this->tenant->getId();
+        $tenantReferenceColumnName = $this->getRawParameter('tenant_reference_column_name');
+
+        return $targetTableAlias.'.'.$tenantReferenceColumnName.' = '.$tenantId;
+    }
+
+    private function getRawParameter(string $name): string
+    {
+        return trim($this->getParameter($name), "'");
     }
 }
